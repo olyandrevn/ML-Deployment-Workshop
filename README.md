@@ -37,3 +37,4 @@ Build and run the Docker Image
 docker build -t fastapi-mnist-app .
 docker run -p 8000:8000 fastapi-mnist-app
 ```
+<img width="1190" alt="Screenshot 2025-01-18 at 1 37 54 PM" src="https://github.com/user-attachments/assets/c48bd87f-1d12-44a9-9232-766d50b3f145" />
