@@ -1,5 +1,7 @@
 # ML-Deployment-Workshop
 
+<img width="876" alt="Screenshot 2025-01-18 at 11 42 37 AM" src="https://github.com/user-attachments/assets/35fe787c-e31a-4588-a2b4-88f773eea97e" />
+
 ### Project Setup
 
 #### Clone the Repository 
