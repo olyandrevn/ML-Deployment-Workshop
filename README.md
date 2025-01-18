@@ -7,8 +7,8 @@
 #### Clone the Repository 
 
 ```
-git clone <repository_url>
-cd <repository_directory>
+git clone https://github.com/olyandrevn/ML-Deployment-Workshop.git
+cd ML-Deployment-Workshop
 ```
 #### Install Dependencies
 

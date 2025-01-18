@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #00000070;
+            backdrop-filter: blur(4px);
+            min-height: 100vh;
+            background-blend-mode: overlay;
+            background-image: url("https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2021/01/Command-Prompt-Command-Not-Recognized.png");
+            background-size: cover;
+            background-position: center top;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .upload-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-form input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .upload-form button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .result-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .result-container h2 {
+            color: #333;
+        }
+
+        .result-class {
+            font-weight: bold;
+        }
+
+        .result-confidence {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Digit Recognition</h1>
+    <div class="upload-form">
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput">
+            <button type="submit" id="submitButton">Predict</button>
+        </form>
+    </div>
+    <div class="result-container" id="resultContainer" style="display: none;">
+        <h2>Recognition Result</h2>
+<!--        <p class="predictions" id="predictions"></p>-->
+        <p class="predicted_digit" id="predicted_digit"></p>
+    </div>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            submitForm();
+        });
+
+        function submitForm() {
+            var form = document.getElementById("uploadForm");
+            var fileInput = document.getElementById("fileInput");
+            var resultContainer = document.getElementById("resultContainer");
+            var predicted_digit = document.getElementById("predicted_digit");
+            var actual_label = document.getElementById("actual_label");
+
+            resultContainer.style.display = "none";
+
+            var formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/predict", true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    predicted_digit.innerText = "Predicted Digit: " + response.predicted_digit;
+                    resultContainer.style.display = "block";
+                } else {
+                    alert("Error: " + xhr.status);
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>
